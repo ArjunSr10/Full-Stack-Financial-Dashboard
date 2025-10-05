@@ -1,0 +1,86 @@
+/* App.css */
+
+/* General app container */
+.app-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0f172a; /* matching dashboard dark background */
+}
+
+/* Content box */
+.app-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: rgba(15, 23, 42, 0.85); /* dark glass effect */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Header */
+.app-header {
+  color: #f1f5f9; /* light text */
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, #3b82f6, #1e40af);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.nav-links a.register {
+  background: linear-gradient(90deg, #10b981, #047857);
+}
+
+.nav-links a:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Shared form input styles */
+form input {
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+form input:focus {
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6); /* subtle glow on focus */
+}
+
+/* Gradient buttons for forms */
+form button {
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+form button:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}

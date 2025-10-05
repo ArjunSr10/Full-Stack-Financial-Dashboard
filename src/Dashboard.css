@@ -1,0 +1,405 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+}
+
+.dashboard-layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.side-panel {
+  width: 250px;
+  padding: 20px;
+  background: #142850;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.side-panel {
+  width: 280px;               /* slightly wider */
+  padding: 25px;
+  background: #142850;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;                  /* space between elements */
+}
+
+.side-panel h2 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.side-panel label {
+  display: block;             /* ensures label is above the dropdown */
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.side-panel select {
+  width: 100%;                /* make dropdown full width of sidebar */
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1e2a47;
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.side-panel button {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.dashboard-container {
+  flex: 1;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.card {
+  background-color: #1b1f38;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-bar .icon {
+  font-size: 1.2rem;
+}
+
+.search-results {
+  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.search-results li {
+  padding: 8px;
+  background: #233554;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-results li:hover {
+  background: #345678;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: #1e2a47;
+  color: #ffffff;
+}
+
+button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background-color: #63a4ff;
+}
+p
+.watchlist-items {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.watchlist-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222b45;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background 0.3s;
+}
+
+.watchlist-items li:hover {
+  background: #2f3b61;
+}
+
+.stock-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-change {
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+
+.price-change.up {
+  color: #4caf50;
+}
+
+.price-change.down {
+  color: #e74c3c;
+}
+
+.remove-btn {
+  background: none;
+  color: #ff4d4d;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Prevent number input from stretching in the sidebar */
+.side-panel input[type="number"] {
+  width: 80px;            /* fixed size */
+  min-width: 70px;
+  max-width: 100px;
+  flex: none;             /* overrides the global flex:1 */
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: #1e2a47;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.watchlist-card {
+  position: relative; /* allows absolute positioning of the delete button */
+  padding-right: 3rem; /* make space so content doesn’t overlap button */
+}
+
+.delete-watchlist-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.delete-watchlist-btn:hover {
+  background-color: #d9363e;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 500px;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-header {
+  color: #0a0a0a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #141414;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #444;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.modal-body {
+  padding: 1rem;
+}
+
+.modal-label {
+  color: #0a0a0a;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.modal-select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.sector-companies-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.company-item {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.company-item label {
+  cursor: pointer;
+}
+
+.company-name {
+  margin-left: 0.5rem;
+  color: black;
+}
+
+.modal-action-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.modal-action-btn:hover {
+  background: #005bb5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Table layout for sector companies --- */
+.sector-companies-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1rem 0;
+}
+
+.sector-companies-table th,
+.sector-companies-table td {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: #0a0a0a; /* dark text inside modal */
+  font-size: 0.95rem;
+}
+
+.sector-companies-table th {
+  font-weight: 600;
+  background-color: #f5f5f5;
+  position: sticky; /* keeps header visible while scrolling */
+  top: 0;
+  z-index: 2;
+}
+
+.sector-companies-table tr:hover {
+  background-color: #f0f8ff; /* subtle highlight on hover */
+}
+
+/* Price change coloring in table */
+.sector-companies-table .up {
+  color: #4caf50; /* green */
+}
+
+.sector-companies-table .down {
+  color: #e74c3c; /* red */
+}
+
+/* --- Spinner loader for live info cells --- */
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid #ccc;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* --- Adjust modal for table content --- */
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 700px; /* a bit wider for table */
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+
+
+
+
+
+
