@@ -167,13 +167,31 @@ def search_stock(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def company_details(request, symbol):
+    import yfinance as yf
+
     try:
         ticker = yf.Ticker(symbol)
-        info = ticker.info
 
-        # Extract price-related fields
+        # Try new method (get_info), fallback to fast_info
+        try:
+            info = ticker.get_info() or {}
+        except Exception:
+            info = {}
+
+        if not info:
+            try:
+                fi = ticker.fast_info
+                info = {
+                    "symbol": symbol,
+                    "longName": getattr(fi, "shortName", symbol),
+                    "regularMarketPrice": getattr(fi, "last_price", None),
+                    "exchangeName": getattr(fi, "exchange", None),
+                }
+            except Exception:
+                info = {}
+
         price_data = {
-            "symbol": info.get("symbol"),
+            "symbol": info.get("symbol", symbol),
             "longName": info.get("longName"),
             "regularMarketPrice": info.get("regularMarketPrice"),
             "regularMarketChange": info.get("regularMarketChange"),
@@ -181,7 +199,6 @@ def company_details(request, symbol):
             "exchangeName": info.get("exchangeName"),
         }
 
-        # Extract company profile fields
         profile_data = {
             "sector": info.get("sector"),
             "industry": info.get("industry"),
@@ -197,6 +214,7 @@ def company_details(request, symbol):
             {"error": "Failed to fetch company details", "details": str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
+
 
 
 # --------------------
@@ -425,24 +443,29 @@ def get_prices_for_symbols(request):
     Return live prices for a list of symbols.
     Body: { "symbols": ["AAPL", "MSFT", ...] }
     """
+    import yfinance as yf
+
     symbols = request.data.get("symbols", [])
     if not symbols or not isinstance(symbols, list):
         return Response({"error": "symbols list required"}, status=status.HTTP_400_BAD_REQUEST)
 
-    tickers_str = " ".join(symbols)
-    batch = yf.Tickers(tickers_str)
-
     prices = {}
+
     for sym in symbols:
         try:
-            info = batch.tickers[sym].info
-            current_price = info.get("regularMarketPrice")
-            previous_close = info.get("previousClose")
-            if current_price is not None and previous_close is not None:
+            ticker = yf.Ticker(sym)
+
+            # Fetch last 2 days of history to calculate change
+            hist = ticker.history(period="2d", interval="1d")
+
+            if not hist.empty:
+                current_price = hist['Close'].iloc[-1]
+                previous_close = hist['Close'].iloc[-2] if len(hist) > 1 else current_price
                 change = current_price - previous_close
                 change_percent = (change / previous_close) * 100 if previous_close else 0
             else:
-                change = change_percent = None
+                current_price = change = change_percent = None
+
         except Exception:
             current_price = change = change_percent = None
 
@@ -453,6 +476,8 @@ def get_prices_for_symbols(request):
         }
 
     return Response(prices, status=status.HTTP_200_OK)
+
+
 
 
 
