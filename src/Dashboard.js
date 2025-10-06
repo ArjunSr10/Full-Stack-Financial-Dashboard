@@ -461,14 +461,12 @@ export default function Dashboard() {
                     <div className="stock-info">
                       <strong>{item.symbol}</strong> - {item.name}
                       {item.current_price !== undefined && (
-  <span className={`price-change ${item.change >= 0 ? "up" : "down"}`}>
-    💵 ${item.current_price.toFixed(2)}
-    {item.change >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
-    {item.change.toFixed(2)} ({item.change_percent.toFixed(2)}%)
-  </span>
-)}
-
-
+                      <span className={`price-change ${item.change >= 0 ? "up" : "down"}`}>
+                        💵 ${item.current_price}
+                        {item.change >= 0 ? <FiTrendingUp /> : <FiTrendingDown />}
+                        {item.change} ({item.change_percent}%)
+                      </span>
+                      )}
                       
                     </div>
                     <button
