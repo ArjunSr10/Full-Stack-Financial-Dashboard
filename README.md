@@ -42,14 +42,7 @@ Landing screen where user can login or register with a new account:  <br/>
 <img src="https://live.staticflickr.com/65535/54835245928_5b265ed861.jpg" height="80%" width="80%"/>
 <br />
 <br />Main dashboard: <br/>
-<img src="https://live.staticflickr.com/65535/54835001331_10087ce43c_h.jpg" height="80%" width="80%"/>
-
-<br />
-<br />
-Example gameplay with movelog on the right:  <br/>
 <img src="https://live.staticflickr.com/65535/54834202572_b1830fab10_b.jpg" height="80%" width="80%"/>
-<br />
-<br />
 
 <!--
  ```diff
